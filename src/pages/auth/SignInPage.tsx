@@ -13,7 +13,7 @@ import {
   FormLabel,
 } from "../../components/ui/form";
 import toast from "react-hot-toast";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AlertCircle, CheckCircle, Loader2, WandSparkles } from "lucide-react";
 import loginUser from "../../services/auth/loginUser";
 
@@ -30,9 +30,11 @@ const SignInPage = () => {
   }, []);
 
   const { login } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: { email: string; password: string }) => {
     try {
+      setIsLoading(true);
       const response = await loginUser({ ...data });
 
       if (response && response.length > 0) {
@@ -51,6 +53,8 @@ const SignInPage = () => {
       }
     } catch (err) {
       toast.error("Error Logging In!");
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -123,8 +127,7 @@ const SignInPage = () => {
                 />
 
                 <Button type="submit">
-                  Submit
-                  {/* {isLoading ? <Loader2 className="animate-spin" /> : "Submit"} */}
+                  {isLoading ? <Loader2 className="animate-spin" /> : "Submit"}
                 </Button>
               </div>
             </form>

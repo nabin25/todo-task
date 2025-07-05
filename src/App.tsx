@@ -4,6 +4,7 @@ import { ThemeProvider } from "./providers/ThemeProvider";
 import AuthProvider from "./providers/AuthProvider";
 import { Toaster } from "react-hot-toast";
 import RoutesComponent from "./routes";
+import StoreProvider from "./providers/StoreProvider";
 
 function App() {
   return (
@@ -11,8 +12,10 @@ function App() {
       <BrowserRouter>
         <ThemeProvider>
           <AuthProvider>
-            <Toaster />
-            <RoutesComponent />
+            <StoreProvider>
+              <Toaster />
+              <RoutesComponent />
+            </StoreProvider>
           </AuthProvider>
         </ThemeProvider>
       </BrowserRouter>
