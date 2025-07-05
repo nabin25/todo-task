@@ -1,3 +1,4 @@
+import TodoWrapper from "../../components/todo/TodoWrapper";
 import { useGetTodosQuery } from "../../services/todo/todoApi";
 import { useEffect } from "react";
 
@@ -6,7 +7,11 @@ const HomePage = () => {
     document.title = "Todo Dashboard-Home";
   }, []);
   const { data: todos, error, isLoading } = useGetTodosQuery();
-  return <div>{todos?.map((singleTodo) => <p>{singleTodo?.title}</p>)}</div>;
+  return (
+    <>
+      <TodoWrapper todos={todos} isLoading={isLoading} />
+    </>
+  );
 };
 
 export default HomePage;

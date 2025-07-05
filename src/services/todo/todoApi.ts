@@ -1,15 +1,9 @@
 import { emptySplitApi } from "../../lib/apiSlice";
-
-export interface Todo {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
+import type { ITodo } from "../../types/todo";
 
 const todoApi = emptySplitApi.injectEndpoints({
   endpoints: (build) => ({
-    getTodos: build.query<Todo[], void>({
+    getTodos: build.query<ITodo[], void>({
       query: () => "todos",
     }),
   }),
