@@ -1,7 +1,10 @@
 import z from "zod";
 
 export const todoSchema = z.object({
-  title: z.string().min(1, "Title is required"),
+  title: z
+    .string()
+    .min(1, "Title is required")
+    .max(100, "Title cannot be more than 100 characters"),
   due_date: z.date({ required_error: "Due date is required" }).refine(
     (date) => {
       const today = new Date();
