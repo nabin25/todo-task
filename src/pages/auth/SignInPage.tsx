@@ -16,6 +16,9 @@ import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { AlertCircle, CheckCircle, Loader2, WandSparkles } from "lucide-react";
 import loginUser from "../../services/auth/loginUser";
+import { hashPassword } from "../../utils/hashPassword";
+import routes from "../../routes/routes";
+import { useNavigate } from "react-router-dom";
 
 type ILoginData = z.infer<typeof loginSchema>;
 
@@ -32,10 +35,13 @@ const SignInPage = () => {
   const { login } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
 
+  const navigate = useNavigate();
+
   const onSubmit = async (data: { email: string; password: string }) => {
+    const hashedPassword = await hashPassword(data.password);
     try {
       setIsLoading(true);
-      const response = await loginUser({ ...data });
+      const response = await loginUser({ ...data, password: hashedPassword });
 
       if (response && response.length > 0) {
         const userData = response[0];
@@ -68,8 +74,8 @@ const SignInPage = () => {
               className="flex flex-col gap-2 rounded-lg justify-center"
             >
               <div className="flex gap-2 text-xl justify-center mb-2">
-                <WandSparkles className="text-[#94288d]" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#94288d] to-[#ff4504] font-bold">
+                <WandSparkles className="text-[#ff6013]" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r dark:from-[#ff6013] dark:to-[#ff9259] from-[#ff6013] to-[#ff874a] font-bold">
                   Todo Dashboard
                 </span>
               </div>
@@ -131,6 +137,19 @@ const SignInPage = () => {
                   {isLoading ? <Loader2 className="animate-spin" /> : "Submit"}
                 </Button>
               </div>
+              <p className="text-center">
+                Don't have an account.{" "}
+                <a
+                  className="text-[#ff6013] cursor-pointer "
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate(routes.auth.signUp);
+                  }}
+                >
+                  Sign up{" "}
+                </a>
+                with dummy email.
+              </p>
             </form>
           </Form>
         </div>

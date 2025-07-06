@@ -17,10 +17,10 @@ const LoadingOverlay = ({ isVisible }: { isVisible: boolean }) => {
         <div className="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-accent-dark dark:border-white"></div>
         <h4 className="text-xl font-bold z-[100001] flex flex-col gap-2 items-center justify-center">
           <WandSparkles className="text-[#ff6013]" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6013] to-[#ffc4a7] font-bold">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r dark:from-[#ff6013] dark:to-[#ff9259] from-[#ff6013] to-[#ff874a] font-bold">
             Todo
           </span>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6013] to-[#ffc4a7] font-bold">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r dark:from-[#ff6013] dark:to-[#ff9259] from-[#ff6013] to-[#ff874a] font-bold">
             Dashboard
           </span>
         </h4>

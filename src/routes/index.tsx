@@ -4,6 +4,7 @@ import SignInPage from "../pages/auth/SignInPage";
 import { useEffect } from "react";
 import AuthRoute from "./AuthRoute";
 import HomePage from "../pages/dashboard/HomePage";
+import SignUpPage from "../pages/auth/SignUpPage";
 
 const RoutesComponent = () => {
   const [params] = useSearchParams();
@@ -20,6 +21,7 @@ const RoutesComponent = () => {
         </Route>
         <Route element={<AuthRoute />}>
           <Route path="auth/sign-in" element={<SignInPage />} />
+          <Route path="auth/sign-up" element={<SignUpPage />} />
         </Route>
       </Routes>
     </>

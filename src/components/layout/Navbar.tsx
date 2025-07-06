@@ -16,7 +16,7 @@ const Navbar = () => {
               className="text-xl font-bold text-black dark:text-white cursor-pointer"
               onClick={() => navigate("/")}
             >
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6013] to-[#ffc4a7] font-bold">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r dark:from-[#ff6013] dark:to-[#ff9259] from-[#ff6013] to-[#ff874a] font-bold">
                 Todo Dashboard
               </span>
             </div>
