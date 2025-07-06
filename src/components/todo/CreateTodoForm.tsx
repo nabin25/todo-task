@@ -50,7 +50,7 @@ export function CreateTodoForm() {
 
   const onSubmit = async (data: TodoFormValues) => {
     try {
-      const res = await addTodo({ ...data, userId: user?.id }).unwrap();
+      await addTodo({ ...data, userId: user?.id }).unwrap();
       toast.success("Todo added successfully!");
       form.reset();
     } catch (err) {

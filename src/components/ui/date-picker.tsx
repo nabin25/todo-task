@@ -27,7 +27,7 @@ export function DatePickerField({
               variant="outline"
               aria-label={ariaLabel}
               className={cn(
-                "w-full text-left font-normal bg-white dark:bg-black",
+                "w-full flex flex-start font-normal bg-white dark:bg-black",
                 !field.value && "text-muted-foreground"
               )}
             >

@@ -35,8 +35,8 @@ const HomePage = () => {
   return (
     <div className="flex h-full gap-4">
       <LoadingOverlay isVisible={isLoading} />
-      <div className="grow overflow-y-auto">
-        <div className="flex gap-2 px-4 py-2 border-b sticky top-0 z-10">
+      <div className="grow">
+        <div className="flex gap-2 px-4 py-2 border-b sticky top-20 bg-white dark:bg-black">
           {tabs.map(({ label, value, icon: Icon }) => (
             <Button
               key={label}
@@ -49,11 +49,17 @@ const HomePage = () => {
             </Button>
           ))}
         </div>
-        {error ? (
-          <NoDataFound />
-        ) : (
-          <TodoWrapper todos={todos} isLoading={isLoading} />
-        )}
+        <div className="overflow-y-auto">
+          {error ? (
+            <NoDataFound />
+          ) : (
+            <TodoWrapper
+              completed={completed}
+              todos={todos}
+              isLoading={isLoading}
+            />
+          )}
+        </div>
       </div>
 
       <div className="w-[300px] lg:w-[400px] p-4 hidden md:block">

@@ -8,6 +8,7 @@ const todoApi = emptySplitApi.injectEndpoints({
         const params: Record<string, any> = {
           userId,
           sortBy: "createdAt",
+          order: "desc",
         };
 
         if (completed !== undefined) {
@@ -25,7 +26,7 @@ const todoApi = emptySplitApi.injectEndpoints({
       query: (newTodo) => ({
         url: "todos",
         method: "POST",
-        body: { ...newTodo, completed: false },
+        body: { ...newTodo, completed: false, createdAt: new Date() },
       }),
       invalidatesTags: ["Todo"],
     }),
@@ -59,6 +60,14 @@ const todoApi = emptySplitApi.injectEndpoints({
       },
       invalidatesTags: ["Todo"],
     }),
+    editTodo: build.mutation<ITodo, Partial<ITodo> & { id: number }>({
+      query: ({ id, ...patch }) => ({
+        url: `todos/${id}`,
+        method: "PUT",
+        body: patch,
+      }),
+      invalidatesTags: ["Todo"],
+    }),
   }),
   overrideExisting: false,
 });
@@ -67,4 +76,5 @@ export const {
   useGetTodosQuery,
   useAddTodoMutation,
   useUpdateTodoStatusMutation,
+  useEditTodoMutation,
 } = todoApi;
