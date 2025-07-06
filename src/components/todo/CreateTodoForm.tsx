@@ -29,7 +29,11 @@ import LoadingOverlay from "../LoadingOverlay";
 
 type TodoFormValues = z.infer<typeof todoSchema>;
 
-export function CreateTodoForm() {
+export function CreateTodoForm({
+  setOpen,
+}: {
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const form = useForm<TodoFormValues>({
     resolver: zodResolver(todoSchema),
     defaultValues: {
@@ -53,6 +57,7 @@ export function CreateTodoForm() {
       await addTodo({ ...data, userId: user?.id }).unwrap();
       toast.success("Todo added successfully!");
       form.reset();
+      setOpen && setOpen(false);
     } catch (err) {
       toast.error("Error adding todo!");
     }

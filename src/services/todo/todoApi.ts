@@ -68,6 +68,13 @@ const todoApi = emptySplitApi.injectEndpoints({
       }),
       invalidatesTags: ["Todo"],
     }),
+    deleteTodo: build.mutation<ITodo, { id: number; userId: number }>({
+      query: ({ id, userId }) => ({
+        url: `users/${userId}/todos/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Todo"],
+    }),
   }),
   overrideExisting: false,
 });
@@ -77,4 +84,5 @@ export const {
   useAddTodoMutation,
   useUpdateTodoStatusMutation,
   useEditTodoMutation,
+  useDeleteTodoMutation,
 } = todoApi;

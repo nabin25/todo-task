@@ -17,24 +17,33 @@ import { useUpdateTodoStatusMutation } from "../../services/todo/todoApi";
 import { useAuth } from "../../providers/AuthProvider";
 import { EditTodoForm } from "./EditTodoForm";
 import { Button } from "../ui/button";
+import { DeleteTodoConfirm } from "./DeleteTodoConfirm";
 
 interface TodoComponentProps {
   todo: ITodo;
   editingTodoId: number | undefined;
   setEditingTodoId: React.Dispatch<React.SetStateAction<number | undefined>>;
+  deletingTodoId: number | undefined;
+  setDeletingTodoId: React.Dispatch<React.SetStateAction<number | undefined>>;
 }
 
 const TodoComponent = ({
   todo,
   editingTodoId,
+  deletingTodoId,
   setEditingTodoId,
+  setDeletingTodoId,
 }: TodoComponentProps) => {
   const { user } = useAuth();
   const [updateTodoStatus, { isLoading: isStatusUpdating }] =
     useUpdateTodoStatusMutation();
   return (
     <>
-      {!(editingTodoId === todo?.id) ? (
+      {deletingTodoId === todo?.id ? (
+        <DeleteTodoConfirm todo={todo} setDeletingTodoId={setDeletingTodoId} />
+      ) : editingTodoId === todo?.id ? (
+        <EditTodoForm todo={todo} setEditingTodoId={setEditingTodoId} />
+      ) : (
         <div className="flex gap-3 mb-5 items-center p-2 border border-gray-500/50 rounded-md relative">
           <div className="w-10 flex-shrink-0 h-full flex items-center justify-center">
             {!isStatusUpdating ? (
@@ -111,14 +120,16 @@ const TodoComponent = ({
               >
                 <Edit />
               </Button>
-              <Button variant="destructive" size="sm">
+              <Button
+                variant="destructive"
+                size="sm"
+                onClick={() => setDeletingTodoId(todo.id)}
+              >
                 <Trash />
               </Button>
             </div>
           </div>
         </div>
-      ) : (
-        <EditTodoForm todo={todo} setEditingTodoId={setEditingTodoId} />
       )}
     </>
   );

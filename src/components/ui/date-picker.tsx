@@ -40,7 +40,13 @@ export function DatePickerField({
           <Calendar
             mode="single"
             selected={field.value}
-            onSelect={(date) => field.onChange(date)}
+            onSelect={(date) => {
+              if (date) {
+                const updatedDate = new Date(date);
+                updatedDate.setHours(23, 59, 0, 0);
+                field.onChange(updatedDate);
+              }
+            }}
           />
         </PopoverContent>
       </Popover>

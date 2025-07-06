@@ -15,12 +15,15 @@ const TodoWrapper = ({
 }) => {
   const [editingTodoId, setEditingTodoId] = useState<number | undefined>();
 
+  const [deletingTodoId, setDeletingTodoId] = useState<number | undefined>();
+
   useEffect(() => {
     setEditingTodoId(undefined);
+    setDeletingTodoId(undefined);
   }, [completed]);
 
   return (
-    <div className="p-4">
+    <div className="py-4">
       {isLoading &&
         Array.from({ length: 20 }).map((_, i) => <TodoSkeleton key={i} />)}
       {todos &&
@@ -31,6 +34,8 @@ const TodoWrapper = ({
             todo={todo}
             editingTodoId={editingTodoId}
             setEditingTodoId={setEditingTodoId}
+            deletingTodoId={deletingTodoId}
+            setDeletingTodoId={setDeletingTodoId}
           />
         ))}
       {!isLoading && todos && todos?.length === 0 && <NoDataFound />}

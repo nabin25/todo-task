@@ -7,6 +7,7 @@ import { Button } from "../../components/ui/button";
 import { CheckCircle, Clock, ListTodo } from "lucide-react";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import NoDataFound from "../../components/NoDataFound";
+import CreateTodoSheet from "../../components/todo/CreateTodoSheet";
 
 const HomePage = () => {
   useEffect(() => {
@@ -36,19 +37,25 @@ const HomePage = () => {
     <div className="flex h-full gap-4">
       <LoadingOverlay isVisible={isLoading} />
       <div className="grow">
-        <div className="flex gap-2 px-4 py-2 border-b sticky top-20 bg-white dark:bg-black">
-          {tabs.map(({ label, value, icon: Icon }) => (
-            <Button
-              key={label}
-              variant={completed === value ? "default" : "outline"}
-              onClick={() => setCompleted(value)}
-              className="text-[11px] h-7"
-            >
-              <Icon className="w-4 h-4" />
-              <span className="hidden lg:block">{label}</span>
-            </Button>
-          ))}
+        <div className="flex py-2 justify-between border-b sticky top-20 z-10 bg-white dark:bg-black">
+          <div className="flex gap-2">
+            {tabs.map(({ label, value, icon: Icon }) => (
+              <Button
+                key={label}
+                variant={completed === value ? "default" : "outline"}
+                onClick={() => setCompleted(value)}
+                className="text-[11px] h-7"
+              >
+                <Icon className="w-4 h-4" />
+                <span className="hidden lg:block">{label}</span>
+              </Button>
+            ))}
+          </div>
+          <div className="block md:hidden">
+            <CreateTodoSheet />
+          </div>
         </div>
+
         <div className="overflow-y-auto">
           {error ? (
             <NoDataFound />
