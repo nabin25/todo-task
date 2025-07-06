@@ -7,6 +7,7 @@ interface IUser {
   full_name: string;
   email: string;
   avatar: string;
+  id: number;
 }
 
 type ContextValue = {
@@ -19,7 +20,6 @@ type ContextValue = {
 const AuthContext = createContext<ContextValue | undefined>(undefined);
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-
   const navigate = useNavigate();
 
   const getInitialAuthState = () => {

@@ -4,5 +4,6 @@ export const emptySplitApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_MOCK_ENDPOINT,
   }),
+  tagTypes: ["Todo"],
   endpoints: () => ({}),
 });

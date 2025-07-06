@@ -4,25 +4,45 @@ import { cn } from "../../lib/utils";
 import {
   CalendarRange,
   CheckCircle2,
+  LoaderCircle,
   OctagonAlert,
   ShieldAlert,
   TriangleAlert,
 } from "lucide-react";
 import { getRelativeTime } from "../../utils/getRelativeTime";
 import { Badge } from "../ui/badge";
+import { useUpdateTodoStatusMutation } from "../../services/todo/todoApi";
+import { useAuth } from "../../providers/AuthProvider";
 
 const TodoComponent = ({ todo }: { todo: ITodo }) => {
+  const { user } = useAuth();
+  const [updateTodoStatus, { isLoading: isStatusUpdating }] =
+    useUpdateTodoStatusMutation();
   return (
     <>
       <div className="flex gap-3 mb-5 items-center p-2 border border-gray-500/50 rounded-md">
         <div className="w-10 flex-shrink-0 h-full flex items-center justify-center">
-          <Checkbox checked={todo?.completed} />
+          {!isStatusUpdating ? (
+            <Checkbox
+              className="hover:cursor-pointer"
+              checked={todo?.completed}
+              onCheckedChange={(checked) => {
+                updateTodoStatus({
+                  id: todo.id,
+                  completed: !!checked,
+                  userId: user?.id ?? 0,
+                });
+              }}
+            />
+          ) : (
+            <LoaderCircle className="animate-spin" />
+          )}
         </div>
         <div className="flex flex-col gap-2 justify-start">
           <h4
             className={cn(
               "font-semibold",
-              todo?.completed ? "line-through" : ""
+              todo?.completed ? "line-through text-muted-foreground/80" : ""
             )}
           >
             {todo.title}

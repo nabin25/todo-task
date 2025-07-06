@@ -44,6 +44,7 @@ const SignInPage = () => {
             full_name: userData?.full_name,
             email: userData?.email,
             avatar: userData?.avatar,
+            id: userData?.id,
           },
           userData?.token
         );

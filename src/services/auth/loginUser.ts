@@ -1,3 +1,5 @@
+import type { IUser } from "@/types/user";
+
 const loginUser = async ({
   email,
   password,
@@ -18,7 +20,7 @@ const loginUser = async ({
     throw new Error("Failed to login");
   }
 
-  const result = await response.json();
+  const result: IUser[] = await response.json();
   return result;
 };
 

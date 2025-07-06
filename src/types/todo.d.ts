@@ -6,4 +6,5 @@ export interface ITodo {
   completed: boolean;
   priority: priorityType;
   due_date: Date;
+  userId: number;
 }
