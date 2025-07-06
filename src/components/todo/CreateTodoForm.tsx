@@ -24,6 +24,8 @@ import { todoSchema } from "../../schemas/todo.schema";
 import { useAddTodoMutation } from "../../services/todo/todoApi";
 import { useAuth } from "../../providers/AuthProvider";
 import { LoaderCircle } from "lucide-react";
+import toast from "react-hot-toast";
+import LoadingOverlay from "../LoadingOverlay";
 
 type TodoFormValues = z.infer<typeof todoSchema>;
 
@@ -35,7 +37,7 @@ export function CreateTodoForm() {
       due_date: (() => {
         const date = new Date();
         date.setDate(date.getDate() + 1);
-        date.setHours(0, 0, 0, 0);
+        date.setHours(23, 59, 0, 0);
         return date;
       })(),
       priority: "MEDIUM",
@@ -49,15 +51,16 @@ export function CreateTodoForm() {
   const onSubmit = async (data: TodoFormValues) => {
     try {
       const res = await addTodo({ ...data, userId: user?.id }).unwrap();
-      console.log("Todo added:", res);
+      toast.success("Todo added successfully!");
+      form.reset();
     } catch (err) {
-      console.error("Add todo failed:", err);
+      toast.error("Error adding todo!");
     }
-    form.reset();
   };
 
   return (
     <Form {...form}>
+      <LoadingOverlay isVisible={isLoading} />
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-4 max-w-md bg-amber-400/20 p-3 rounded-md shadow-2xl dark:bg-amber-600/20"

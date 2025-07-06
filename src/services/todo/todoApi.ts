@@ -3,11 +3,22 @@ import type { ITodo } from "../../types/todo";
 
 const todoApi = emptySplitApi.injectEndpoints({
   endpoints: (build) => ({
-    getTodos: build.query<ITodo[], { userId: number }>({
-      query: ({ userId }) => ({
-        url: "todos",
-        params: { userId },
-      }),
+    getTodos: build.query<ITodo[], { userId: number; completed?: boolean }>({
+      query: ({ userId, completed }) => {
+        const params: Record<string, any> = {
+          userId,
+          sortBy: "createdAt",
+        };
+
+        if (completed !== undefined) {
+          params.completed = completed;
+        }
+
+        return {
+          url: "todos",
+          params,
+        };
+      },
       providesTags: ["Todo"],
     }),
     addTodo: build.mutation<ITodo, Partial<ITodo>>({
