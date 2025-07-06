@@ -1,69 +1,61 @@
-# React + TypeScript + Vite
+## Project Setup
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Follow these steps to get the project running locally.
 
-Currently, two official plugins are available:
+### 1. Clone the Repository
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/nabin25/todo-task.git
+cd todo-task
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Setup Environment
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Rename `.env.example` on root of the project to `.env`
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Browse to <a href="https://mockapi.io">Mock api</a> and create resources **users**, **todos** with the types mentioned under `types` folder.
+
+
+### 3. Install Dependencies
+
+```bash
+npm i
 ```
+
+or if you are using `pnpm` then
+
+```bash
+pnpm install
+```
+
+### 3. Run the development server
+
+```bash
+npm run dev
+```
+
+or if you are using `pnpm` then
+
+```bash
+pnpm dev
+```
+
+Your server will be live on <a href="http://localhost:5173">http://localhost:5173</a>
+
+
+## Improvements made
+
+- Implemented authentication to show user-wise todos.
+
+- Used MockAPI instead of jsonplaceholder to reflect the changes of mutations on query.
+
+- Added Signup page with password meter for creating new accounts.
+
+- Added due date and priority field in todos for more details about the todo.
+
+
+## Bonus features implemented
+
+- Added Dark / Light mode toggle with system theme as default and persisted theme on localstorage
+
+- Added spinners and skeletons on API calls pending state. 
