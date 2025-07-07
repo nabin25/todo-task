@@ -115,6 +115,7 @@ const TodoComponent = ({
             <div className="absolute bottom-2 right-10 flex justify-between gap-3">
               <Button
                 variant="secondary"
+                aria-label="Edit todo"
                 onClick={() => setEditingTodoId(todo.id)}
                 size="sm"
               >
@@ -123,6 +124,7 @@ const TodoComponent = ({
               <Button
                 variant="destructive"
                 size="sm"
+                aria-label="Delete todo"
                 onClick={() => setDeletingTodoId(todo.id)}
               >
                 <Trash />

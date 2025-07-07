@@ -47,13 +47,18 @@ export function DeleteTodoConfirm({ todo, setDeletingTodoId }: EditTodoProps) {
           <p className="text-red-400">Confirm Delete?</p>
 
           <div className="absolute bottom-2 right-10 flex justify-between gap-3">
-            <Button size="sm" onClick={() => handleDelete(todo.id)}>
+            <Button
+              size="sm"
+              onClick={() => handleDelete(todo.id)}
+              aria-label="Confirm delete"
+            >
               <Check />
             </Button>
             <Button
               variant="destructive"
               onClick={() => setDeletingTodoId(undefined)}
               size="sm"
+              aria-label="Cancel delete"
             >
               <X />
             </Button>

@@ -143,13 +143,15 @@ export function EditTodoForm({ todo, setEditingTodoId }: EditTodoProps) {
               />
             </div>
             <div className="absolute bottom-2 right-10 flex justify-between gap-3">
-              <Button size="sm">
+              <Button size="sm" type="submit" aria-label="Confirm edit">
                 <Check />
               </Button>
               <Button
                 variant="destructive"
                 onClick={() => setEditingTodoId(undefined)}
                 size="sm"
+                type="button"
+                aria-label="Cancel edit"
               >
                 <X />
               </Button>
